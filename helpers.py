@@ -1,4 +1,3 @@
-import os
 import smtplib
 from email.mime.text import MIMEText
 
@@ -22,12 +21,12 @@ def create_email(subject: str, _from: str, to: str, body: str) -> MIMEText:
     return email
 
 
-def send_mail(email: MIMEText):
+def send_mail(email: MIMEText, email_address: str, password: str):
     """Creates a new SMTP connection and sends a new email."""
     s = smtplib.SMTP(host='smtp.gmail.com', port=587)
     s.ehlo()
     s.starttls()
-    s.login(os.getenv('EMAIL'), os.getenv('PASSWORD'))
+    s.login(email_address, password)
     s.send_message(email)
 
     s.quit()
